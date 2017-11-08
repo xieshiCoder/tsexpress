@@ -1,0 +1,10 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {},
+    //https://github.com/ajafff/tslint-consistent-codestyle/blob/master/tslint.json
+    "rulesDirectory": ["tslint-consistent-codestyle"]
+}
