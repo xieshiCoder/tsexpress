@@ -1,6 +1,9 @@
 import * as express from "express";
+import * as fs from "fs";
 import * as log4js from "log4js";
-const logger = log4js.getLogger("app");
+
+log4js.configure("./src/config/log4js.json");
+const log = log4js.getLogger("startup");
 
 const app = express();
 
@@ -10,6 +13,6 @@ app.get("/", (req, res) => {
     res.send("hello word");
 });
 
-app.listen(3000, "localhost", () => {
-    logger.debug("项目已启动：3000");
+const server = app.listen(3000, "localhost", () => {
+    log.info("Express server listening on port ", server.address().port, " with pid ", process.pid );
 });

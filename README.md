@@ -78,6 +78,37 @@
 > - 为VSCode安装TSLint插件，设置保存自动修复  
 
 #### 配置日志
+> - 安装依赖  
 ```
     npm install -D log4js
+```
+> - log4js.json配置文件
+```
+    {
+    "appenders": {
+        "console": { "type": "console" },
+        "everything": { "type": "dateFile", "compress": true, "filename": "./log/all/all.log" },
+        "emergencies": { "type": "dateFile", "compress": true, "filename": "./log/error/error.log" },
+        "just-errors": { "type": "logLevelFilter", "appender": "emergencies", "level": "error" }
+    },
+    "categories": {
+        "default": {"appenders": [ "everything", "just-errors", "console" ], "level": "info" ,"layout": {
+        "type": "pattern",
+        "pattern": " %d %p %c %m%n"
+        }}
+    }
+    }
+```
+> - 在程序入口配置
+```
+    log4js.configure("./src/config/log4js.json");
+```
+> - 在模块中使用
+```
+    import * as log4j from 'log4j'
+    let log = log4js.getLogger("categoryName"); //categoryName表示类型名称
+    log.debug("");
+    log.info("");
+    log.warn("");
+    log.error("");
 ```
